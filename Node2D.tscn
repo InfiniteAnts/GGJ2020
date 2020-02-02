@@ -1,0 +1,315 @@
+[gd_scene load_steps=34 format=2]
+
+[ext_resource path="res://Monster.gd" type="Script" id=1]
+[ext_resource path="res://Robot.gd" type="Script" id=2]
+[ext_resource path="res://Node2D.gd" type="Script" id=3]
+[ext_resource path="res://mecharepair_0000s_0001_Mecha-copy.png" type="Texture" id=4]
+[ext_resource path="res://RobotStats.gd" type="Script" id=5]
+[ext_resource path="res://MonsterStats.gd" type="Script" id=6]
+[ext_resource path="res://mecharepair_0000s_0004_Cityscape-copy.png" type="Texture" id=7]
+[ext_resource path="res://mecharepair_0000s_0000_Foreground-copy.png" type="Texture" id=8]
+[ext_resource path="res://mecharepair_0000s_0002_Alien-copy.png" type="Texture" id=9]
+[ext_resource path="res://mecharepair_0000s_0003_Shadow.png" type="Texture" id=10]
+[ext_resource path="res://Teko/Teko-Regular.ttf" type="DynamicFontData" id=11]
+[ext_resource path="res://mecharepair_0001s_0005_Layer-13.png" type="Texture" id=12]
+[ext_resource path="res://mecharepair_0001s_0004_Layer-14.png" type="Texture" id=13]
+[ext_resource path="res://mecharepair_0001s_0003_Layer-15.png" type="Texture" id=14]
+[ext_resource path="res://mecharepair_0001s_0002_Layer-16.png" type="Texture" id=15]
+[ext_resource path="res://mecharepair_anim_0001s_0001s_0003_slash_3.png" type="Texture" id=16]
+[ext_resource path="res://mecharepair_anim_0001s_0001s_0001_slash_2.png" type="Texture" id=17]
+[ext_resource path="res://mecharepair_anim_0001s_0001s_0000_slash_1.png" type="Texture" id=18]
+[ext_resource path="res://mecharepair_anim_0001s_0001s_0002_slash_4.png" type="Texture" id=19]
+[ext_resource path="res://mecharepair_0000_HP-Bar-Right-Empty.png" type="Texture" id=20]
+[ext_resource path="res://mecharepair_0001_HP-Bar-Right-Full.png" type="Texture" id=21]
+[ext_resource path="res://mecharepair_0003_HP-Bar-Left-Full.png" type="Texture" id=22]
+[ext_resource path="res://mecharepair_0002_HP-Bar-Left-Empty.png" type="Texture" id=23]
+[ext_resource path="res://blueprint/mecharepair_blueprint_0005_Armor_Orange.png" type="Texture" id=24]
+[ext_resource path="res://blueprint/mecharepair_blueprint_0002_Legs_Orange.png" type="Texture" id=25]
+[ext_resource path="res://blueprint/mecharepair_blueprint_0017_Head_Orange.png" type="Texture" id=26]
+[ext_resource path="res://blueprint/mecharepair_blueprint_0011_Rocket_Orange.png" type="Texture" id=27]
+[ext_resource path="res://blueprint/mecharepair_blueprint_0014_Torso_Orange.png" type="Texture" id=28]
+[ext_resource path="res://blueprint/mecharepair_blueprint_0008_Blade_Orange.png" type="Texture" id=29]
+[ext_resource path="res://blueprint/mecharepair_blueprint_bg.png" type="Texture" id=30]
+
+[sub_resource type="DynamicFont" id=1]
+size = 32
+font_data = ExtResource( 11 )
+
+[sub_resource type="Theme" id=2]
+default_font = SubResource( 1 )
+
+[sub_resource type="Animation" id=5]
+resource_name = "melee"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ ExtResource( 18 ), ExtResource( 17 ), ExtResource( 16 ), ExtResource( 19 ) ]
+}
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource( 3 )
+
+[node name="Volley_Timer" type="Timer" parent="."]
+wait_time = 2.0
+autostart = true
+
+[node name="Robot" type="Sprite" parent="."]
+position = Vector2( 499.248, 263.863 )
+scale = Vector2( 0.8, 0.8 )
+texture = ExtResource( 4 )
+script = ExtResource( 2 )
+
+[node name="Shadow" type="Sprite" parent="Robot"]
+show_behind_parent = true
+position = Vector2( 0, 217.5 )
+scale = Vector2( 0.8, 0.8 )
+texture = ExtResource( 10 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
+
+[node name="RobotStats" type="VBoxContainer" parent="Robot"]
+margin_left = -153.0
+margin_top = 321.0
+margin_right = 325.0
+margin_bottom = 1019.0
+rect_scale = Vector2( 0.6, 0.6 )
+theme = SubResource( 2 )
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="armour" type="HSplitContainer" parent="Robot/RobotStats"]
+margin_right = 478.0
+margin_bottom = 227.0
+
+[node name="Icon" type="TextureRect" parent="Robot/RobotStats/armour"]
+margin_right = 187.0
+margin_bottom = 227.0
+texture = ExtResource( 12 )
+
+[node name="Value" type="Label" parent="Robot/RobotStats/armour"]
+margin_left = 199.0
+margin_top = 90.0
+margin_right = 478.0
+margin_bottom = 137.0
+
+[node name="mel_atk" type="HSplitContainer" parent="Robot/RobotStats"]
+margin_top = 231.0
+margin_right = 478.0
+margin_bottom = 548.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Icon" type="TextureRect" parent="Robot/RobotStats/mel_atk"]
+margin_left = 50.0
+margin_right = 113.0
+margin_bottom = 317.0
+texture = ExtResource( 13 )
+
+[node name="Value" type="Label" parent="Robot/RobotStats/mel_atk"]
+margin_left = 125.0
+margin_top = 135.0
+margin_right = 478.0
+margin_bottom = 182.0
+
+[node name="rngd_atk" type="HSplitContainer" parent="Robot/RobotStats"]
+margin_top = 552.0
+margin_right = 478.0
+margin_bottom = 889.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="TextureRect" parent="Robot/RobotStats/rngd_atk"]
+margin_right = 286.0
+margin_bottom = 337.0
+texture = ExtResource( 14 )
+
+[node name="Value" type="Label" parent="Robot/RobotStats/rngd_atk"]
+margin_left = 298.0
+margin_top = 145.0
+margin_right = 478.0
+margin_bottom = 192.0
+
+[node name="dodge" type="HSplitContainer" parent="Robot/RobotStats"]
+margin_top = 893.0
+margin_right = 478.0
+margin_bottom = 1140.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="TextureRect" parent="Robot/RobotStats/dodge"]
+margin_right = 350.0
+margin_bottom = 247.0
+texture = ExtResource( 15 )
+
+[node name="Value" type="Label" parent="Robot/RobotStats/dodge"]
+margin_left = 362.0
+margin_top = 100.0
+margin_right = 478.0
+margin_bottom = 147.0
+
+[node name="Panel" type="Panel" parent="Robot"]
+show_behind_parent = true
+anchor_left = 0.295
+anchor_top = 1.039
+anchor_right = 0.295
+anchor_bottom = 1.039
+margin_left = -371.005
+margin_top = -327.297
+margin_right = 145.995
+margin_bottom = 374.703
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Monster" type="Sprite" parent="."]
+modulate = Color( 0.894118, 0.513726, 0.513726, 1 )
+position = Vector2( 1520.4, 281.781 )
+scale = Vector2( 0.8, 0.8 )
+texture = ExtResource( 9 )
+script = ExtResource( 1 )
+
+[node name="MonsterStats" type="VBoxContainer" parent="Monster"]
+margin_left = -19.4834
+margin_top = 43.59
+margin_right = 20.5166
+margin_bottom = 83.59
+script = ExtResource( 6 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="hp" type="HSplitContainer" parent="Monster/MonsterStats"]
+margin_right = 40.0
+margin_bottom = 14.0
+
+[node name="Label" type="Label" parent="Monster/MonsterStats/hp"]
+margin_bottom = 14.0
+
+[node name="Value" type="Label" parent="Monster/MonsterStats/hp"]
+margin_left = 12.0
+margin_right = 40.0
+margin_bottom = 14.0
+
+[node name="Foreground" type="Sprite" parent="."]
+position = Vector2( 961.453, 388.865 )
+scale = Vector2( 0.8, 0.8 )
+texture = ExtResource( 8 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
+
+[node name="Cityscape" type="Sprite" parent="."]
+show_behind_parent = true
+position = Vector2( 961.453, 260.865 )
+scale = Vector2( 0.8, 0.8 )
+texture = ExtResource( 7 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
+
+[node name="Camera2D" type="Camera2D" parent="."]
+anchor_mode = 0
+current = true
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/melee = SubResource( 5 )
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 1281.5, 243.302 )
+texture = ExtResource( 19 )
+
+[node name="Healthbars" type="HSplitContainer" parent="."]
+margin_top = 424.0
+margin_right = 1920.0
+margin_bottom = 540.0
+split_offset = 80
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="RobotHealth" type="TextureProgress" parent="Healthbars"]
+margin_right = 992.0
+margin_bottom = 116.0
+value = 100.0
+rounded = true
+texture_under = ExtResource( 20 )
+texture_progress = ExtResource( 21 )
+
+[node name="MonsterHealth" type="TextureProgress" parent="Healthbars"]
+margin_left = 1004.0
+margin_right = 1920.0
+margin_bottom = 116.0
+value = 100.0
+texture_under = ExtResource( 23 )
+texture_progress = ExtResource( 22 )
+fill_mode = 1
+stretch_margin_left = 960
+
+[node name="Blueprint" type="Sprite" parent="."]
+position = Vector2( 188.279, 801.967 )
+scale = Vector2( 0.31, 0.31 )
+texture = ExtResource( 30 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
+
+[node name="Helmet" type="Sprite" parent="Blueprint"]
+texture = ExtResource( 26 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Chest" type="Sprite" parent="Blueprint"]
+texture = ExtResource( 28 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="LeftArm" type="Sprite" parent="Blueprint"]
+texture = ExtResource( 27 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="RightArm" type="Sprite" parent="Blueprint"]
+texture = ExtResource( 29 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Legs" type="Sprite" parent="Blueprint"]
+texture = ExtResource( 24 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Feet" type="Sprite" parent="Blueprint"]
+texture = ExtResource( 25 )
+__meta__ = {
+"_edit_lock_": true
+}
+[connection signal="timeout" from="Volley_Timer" to="." method="_on_Volley_Timer_timeout"]
