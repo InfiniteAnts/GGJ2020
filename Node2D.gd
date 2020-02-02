@@ -25,4 +25,3 @@ func _on_Volley_Timer_timeout():
 	$Robot.attacked(monster_atk)
 	
 	$Camera2D/ScreenShake.start()
-	$Volley_Timer.start()

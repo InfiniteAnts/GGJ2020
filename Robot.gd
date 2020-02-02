@@ -16,6 +16,7 @@ var rng = RandomNumberGenerator.new()
 func _ready():
 	
 	# Set the initial stats
+	$'../Healthbars'.update_robot_health(health['hp'])
 	$RobotStats.update_stats(health)
 	
 	# Randomize the seed
@@ -57,6 +58,7 @@ func attacked(monster_atk):
 		
 		health[item] = clamp(health[item], 0, 100)
 
+	$'../Healthbars'.update_robot_health(health['hp'])
 	$RobotStats.update_stats(health)
 	
 # Robot's attack
@@ -73,7 +75,7 @@ func attack():
 		if type == 'MEL':
 			atk = stab_effect * atk
 
-		$'../AnimationPlayer'.play("melee")
+		$'../AnimatedSprite'.play('melee')
 		
 	# Robot does ranged attack
 	else:
@@ -82,5 +84,10 @@ func attack():
 		# Check if robot type is RNGD
 		if type == 'RNGD':
 			atk = stab_effect * rngd_atk
+			
+		$'../AnimatedSprite'.play('ranged')
 
 	return atk
+
+func _on_AnimatedSprite_animation_finished():
+	$'../AnimatedSprite'.play('idle')

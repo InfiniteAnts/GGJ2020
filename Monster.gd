@@ -31,6 +31,8 @@ func _ready():
 		type = 'MEL'
 	else:
 		type = 'RNGD'
+		
+	$'../Healthbars'.update_monster_health(hp)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
@@ -69,4 +71,4 @@ func attacked(monster_atk):
 	
 	hp = hp - damage_taken
 	
-	$MonsterStats.update_stats(hp)
+	$'../Healthbars'.update_monster_health(hp)

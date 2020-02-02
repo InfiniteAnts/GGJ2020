@@ -12,5 +12,9 @@ func _ready():
 func update_stats(health):
 	
 	for item in health:
+		
+		if item == 'hp':
+			continue
+		
 		var string = item + '/Value'
 		get_node(string).text = str(health[item])
