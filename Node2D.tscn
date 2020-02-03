@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=2]
+[gd_scene load_steps=61 format=2]
 
 [ext_resource path="res://Monster.gd" type="Script" id=1]
 [ext_resource path="res://Robot.gd" type="Script" id=2]
@@ -33,6 +33,23 @@
 [ext_resource path="res://mecharepair_anim_0001s_0000s_0000_boom_3.png" type="Texture" id=31]
 [ext_resource path="res://mecharepair_anim_0001s_0000s_0002_boom_1.png" type="Texture" id=32]
 [ext_resource path="res://Healthbars.gd" type="Script" id=33]
+[ext_resource path="res://blueprint/mecharepair_blueprint_0016_Head_Red.png" type="Texture" id=34]
+[ext_resource path="res://blueprint/mecharepair_blueprint_0018_Head_Green.png" type="Texture" id=35]
+[ext_resource path="res://blueprint/mecharepair_blueprint_0015_Torso_Green.png" type="Texture" id=36]
+[ext_resource path="res://blueprint/mecharepair_blueprint_0013_Torso_Red.png" type="Texture" id=37]
+[ext_resource path="res://blueprint/mecharepair_blueprint_0012_Rocket_Green.png" type="Texture" id=38]
+[ext_resource path="res://blueprint/mecharepair_blueprint_0010_Rocket_Red.png" type="Texture" id=39]
+[ext_resource path="res://blueprint/mecharepair_blueprint_0009_Blade_Green.png" type="Texture" id=40]
+[ext_resource path="res://blueprint/mecharepair_blueprint_0007_Blade_Red.png" type="Texture" id=41]
+[ext_resource path="res://blueprint/mecharepair_blueprint_0004_Armor_Red.png" type="Texture" id=42]
+[ext_resource path="res://blueprint/mecharepair_blueprint_0006_Armor_Green.png" type="Texture" id=43]
+[ext_resource path="res://blueprint/mecharepair_blueprint_0003_Legs_Green.png" type="Texture" id=44]
+[ext_resource path="res://blueprint/mecharepair_blueprint_0001_Legs_Red.png" type="Texture" id=45]
+[ext_resource path="res://sfx_rocket_launcher.wav" type="AudioStream" id=46]
+[ext_resource path="res://sfx_sword_swing.wav" type="AudioStream" id=47]
+[ext_resource path="res://sfx_monster_shriek.wav" type="AudioStream" id=48]
+[ext_resource path="res://battle.ogg" type="AudioStream" id=49]
+[ext_resource path="res://StartGame.tscn" type="PackedScene" id=50]
 
 [sub_resource type="DynamicFont" id=1]
 size = 58
@@ -41,22 +58,115 @@ font_data = ExtResource( 11 )
 [sub_resource type="Theme" id=2]
 default_font = SubResource( 1 )
 
-[sub_resource type="Animation" id=3]
-resource_name = "melee"
-tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:texture")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
-"update": 1,
-"values": [ ExtResource( 18 ), ExtResource( 17 ), ExtResource( 16 ), ExtResource( 19 ) ]
-}
+[sub_resource type="SpriteFrames" id=3]
+animations = [ {
+"frames": [ ExtResource( 35 ) ],
+"loop": false,
+"name": "high",
+"speed": 1.0
+}, {
+"frames": [ ExtResource( 26 ) ],
+"loop": false,
+"name": "med",
+"speed": 1.0
+}, {
+"frames": [ ExtResource( 34 ) ],
+"loop": false,
+"name": "low",
+"speed": 1.0
+} ]
 
 [sub_resource type="SpriteFrames" id=4]
+animations = [ {
+"frames": [ ExtResource( 36 ) ],
+"loop": false,
+"name": "high",
+"speed": 1.0
+}, {
+"frames": [ ExtResource( 28 ) ],
+"loop": false,
+"name": "med",
+"speed": 1.0
+}, {
+"frames": [ ExtResource( 37 ) ],
+"loop": false,
+"name": "low",
+"speed": 1.0
+} ]
+
+[sub_resource type="SpriteFrames" id=5]
+animations = [ {
+"frames": [ ExtResource( 38 ) ],
+"loop": false,
+"name": "high",
+"speed": 1.0
+}, {
+"frames": [ ExtResource( 27 ) ],
+"loop": false,
+"name": "med",
+"speed": 1.0
+}, {
+"frames": [ ExtResource( 39 ) ],
+"loop": false,
+"name": "low",
+"speed": 1.0
+} ]
+
+[sub_resource type="SpriteFrames" id=6]
+animations = [ {
+"frames": [ ExtResource( 40 ) ],
+"loop": false,
+"name": "high",
+"speed": 1.0
+}, {
+"frames": [ ExtResource( 29 ) ],
+"loop": false,
+"name": "med",
+"speed": 1.0
+}, {
+"frames": [ ExtResource( 41 ) ],
+"loop": false,
+"name": "low",
+"speed": 1.0
+} ]
+
+[sub_resource type="SpriteFrames" id=7]
+animations = [ {
+"frames": [ ExtResource( 43 ) ],
+"loop": false,
+"name": "high",
+"speed": 1.0
+}, {
+"frames": [ ExtResource( 24 ) ],
+"loop": false,
+"name": "med",
+"speed": 1.0
+}, {
+"frames": [ ExtResource( 42 ) ],
+"loop": false,
+"name": "low",
+"speed": 1.0
+} ]
+
+[sub_resource type="SpriteFrames" id=8]
+animations = [ {
+"frames": [ ExtResource( 44 ) ],
+"loop": false,
+"name": "high",
+"speed": 1.0
+}, {
+"frames": [ ExtResource( 25 ) ],
+"loop": false,
+"name": "med",
+"speed": 1.0
+}, {
+"frames": [ ExtResource( 45 ) ],
+"loop": false,
+"name": "low",
+"speed": 1.0
+} ]
+
+[sub_resource type="SpriteFrames" id=9]
 animations = [ {
 "frames": [ null ],
 "loop": false,
@@ -73,6 +183,10 @@ animations = [ {
 "name": "ranged",
 "speed": 4.0
 } ]
+
+[sub_resource type="DynamicFont" id=10]
+size = 48
+font_data = ExtResource( 11 )
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource( 3 )
@@ -92,6 +206,16 @@ script = ExtResource( 2 )
 __meta__ = {
 "_edit_group_": true,
 "_edit_lock_": true
+}
+mel_atk = 20
+rngd_atk = 20
+dodge = 35
+health = {
+"armour": 75,
+"dodge": 100,
+"hp": 100,
+"mel_atk": 100,
+"rngd_atk": 100
 }
 
 [node name="Shadow" type="Sprite" parent="Robot"]
@@ -129,11 +253,11 @@ texture = ExtResource( 12 )
 [node name="Value" type="Label" parent="Robot/RobotStats/armour"]
 margin_left = 199.0
 margin_top = 71.0
+margin_right = 478.0
 margin_bottom = 155.0
 align = 2
 
 [node name="mel_atk" type="HSplitContainer" parent="Robot/RobotStats"]
-margin_left = 70.0
 margin_top = 231.0
 margin_right = 478.0
 margin_bottom = 548.0
@@ -149,7 +273,7 @@ texture = ExtResource( 13 )
 [node name="Value" type="Label" parent="Robot/RobotStats/mel_atk"]
 margin_left = 125.0
 margin_top = 116.0
-margin_right = 408.0
+margin_right = 478.0
 margin_bottom = 200.0
 align = 2
 
@@ -204,8 +328,48 @@ margin_top = -327.297
 margin_right = -1.005
 margin_bottom = 374.703
 __meta__ = {
+"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
+
+[node name="Blueprint" type="Sprite" parent="Robot"]
+position = Vector2( -388.711, 672.63 )
+scale = Vector2( 0.3875, 0.3875 )
+texture = ExtResource( 30 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
+
+[node name="Helmet" type="AnimatedSprite" parent="Robot/Blueprint"]
+frames = SubResource( 3 )
+animation = "med"
+
+[node name="Chest" type="AnimatedSprite" parent="Robot/Blueprint"]
+frames = SubResource( 4 )
+animation = "low"
+
+[node name="LeftArm" type="AnimatedSprite" parent="Robot/Blueprint"]
+frames = SubResource( 5 )
+animation = "low"
+
+[node name="RightArm" type="AnimatedSprite" parent="Robot/Blueprint"]
+frames = SubResource( 6 )
+animation = "low"
+
+[node name="Legs" type="AnimatedSprite" parent="Robot/Blueprint"]
+frames = SubResource( 7 )
+animation = "low"
+
+[node name="Feet" type="AnimatedSprite" parent="Robot/Blueprint"]
+frames = SubResource( 8 )
+animation = "low"
+
+[node name="RangedSound" type="AudioStreamPlayer" parent="Robot"]
+stream = ExtResource( 46 )
+
+[node name="MeleeSound" type="AudioStreamPlayer" parent="Robot"]
+stream = ExtResource( 47 )
 
 [node name="Monster" type="Sprite" parent="."]
 modulate = Color( 0.894118, 0.513726, 0.513726, 1 )
@@ -213,6 +377,14 @@ position = Vector2( 1520.4, 281.781 )
 scale = Vector2( 0.8, 0.8 )
 texture = ExtResource( 9 )
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
+dodge = 12
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Monster"]
+stream = ExtResource( 48 )
 
 [node name="Foreground" type="Sprite" parent="."]
 position = Vector2( 961.453, 388.865 )
@@ -240,14 +412,6 @@ __meta__ = {
 "_edit_group_": true,
 "_edit_lock_": true
 }
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/melee = SubResource( 3 )
-
-[node name="Sprite" type="Sprite" parent="."]
-visible = false
-position = Vector2( 1281.5, 243.302 )
-texture = ExtResource( 18 )
 
 [node name="Healthbars" type="HSplitContainer" parent="."]
 margin_top = 424.0
@@ -279,55 +443,36 @@ texture_progress = ExtResource( 22 )
 fill_mode = 1
 stretch_margin_left = 960
 
-[node name="Blueprint" type="Sprite" parent="."]
-position = Vector2( 188.279, 801.967 )
-scale = Vector2( 0.31, 0.31 )
-texture = ExtResource( 30 )
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+position = Vector2( 1238.58, 223.514 )
+frames = SubResource( 9 )
+animation = "idle"
+speed_scale = 3.0
 __meta__ = {
 "_edit_group_": true,
 "_edit_lock_": true
 }
 
-[node name="Helmet" type="Sprite" parent="Blueprint"]
-texture = ExtResource( 26 )
+[node name="Position2D" type="Position2D" parent="."]
+position = Vector2( 677.472, 524.059 )
+
+[node name="Label" type="Label" parent="."]
+margin_left = 1185.0
+margin_top = 745.0
+margin_right = 1915.0
+margin_bottom = 1079.0
+custom_fonts/font = SubResource( 10 )
 __meta__ = {
-"_edit_lock_": true
+"_edit_use_anchors_": false
 }
 
-[node name="Chest" type="Sprite" parent="Blueprint"]
-texture = ExtResource( 28 )
-__meta__ = {
-"_edit_lock_": true
-}
+[node name="Timer" type="Timer" parent="Label"]
+wait_time = 3.0
 
-[node name="LeftArm" type="Sprite" parent="Blueprint"]
-texture = ExtResource( 27 )
-__meta__ = {
-"_edit_lock_": true
-}
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 49 )
 
-[node name="RightArm" type="Sprite" parent="Blueprint"]
-texture = ExtResource( 29 )
-__meta__ = {
-"_edit_lock_": true
-}
-
-[node name="Legs" type="Sprite" parent="Blueprint"]
-texture = ExtResource( 24 )
-__meta__ = {
-"_edit_lock_": true
-}
-
-[node name="Feet" type="Sprite" parent="Blueprint"]
-texture = ExtResource( 25 )
-__meta__ = {
-"_edit_lock_": true
-}
-
-[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
-position = Vector2( 1238.58, 223.514 )
-frames = SubResource( 4 )
-animation = "idle"
-speed_scale = 3.0
+[node name="StartGame" parent="." instance=ExtResource( 50 )]
 [connection signal="timeout" from="Volley_Timer" to="." method="_on_Volley_Timer_timeout"]
 [connection signal="animation_finished" from="AnimatedSprite" to="Robot" method="_on_AnimatedSprite_animation_finished"]
+[connection signal="start_game" from="StartGame" to="." method="_on_StartGame_start_game"]

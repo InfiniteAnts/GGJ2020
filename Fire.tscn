@@ -1,0 +1,69 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://mechrepair_minigame_fire/mechrepair_minigames_fire_export_0003_Extinguish-Flame_2_frame-2.png" type="Texture" id=1]
+[ext_resource path="res://mechrepair_minigame_fire/mechrepair_minigames_fire_export_0002_Extinguish-Flame_3_frame-1.png" type="Texture" id=2]
+[ext_resource path="res://mechrepair_minigame_fire/mechrepair_minigames_fire_export_0001_Extinguish-Flame_3_frame-2.png" type="Texture" id=3]
+[ext_resource path="res://mechrepair_minigame_fire/mechrepair_minigames_fire_export_0006_Extinguish-Flame_1_frame-1.png" type="Texture" id=4]
+[ext_resource path="res://mechrepair_minigame_fire/mechrepair_minigames_fire_export_0004_Extinguish-Flame_2_frame-1.png" type="Texture" id=5]
+[ext_resource path="res://mechrepair_minigame_fire/mechrepair_minigames_fire_export_0005_Extinguish-Flame_1_frame-2.png" type="Texture" id=6]
+[ext_resource path="res://Fire.gd" type="Script" id=7]
+[ext_resource path="res://sfx_fire.wav" type="AudioStream" id=8]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 4 ), ExtResource( 6 ) ],
+"loop": true,
+"name": "1",
+"speed": 2.0
+}, {
+"frames": [ ExtResource( 5 ), ExtResource( 1 ) ],
+"loop": true,
+"name": "2",
+"speed": 2.0
+}, {
+"frames": [ ExtResource( 2 ), ExtResource( 3 ) ],
+"loop": true,
+"name": "3",
+"speed": 2.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 76.806, 76.2168 )
+
+[sub_resource type="Animation" id=3]
+resource_name = "fade"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.3, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 0.217638, 1 ),
+"update": 0,
+"values": [ Vector2( 0.6, 0.6 ), Vector2( 0.7, 0.7 ), Vector2( 0.2, 0.2 ), Vector2( 0.1, 0.1 ) ]
+}
+
+[node name="Fire" type="Area2D"]
+show_behind_parent = true
+scale = Vector2( 0.6, 0.6 )
+script = ExtResource( 7 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+frames = SubResource( 1 )
+animation = "3"
+speed_scale = 10.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 2 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/fade = SubResource( 3 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 8 )
+autoplay = true
+[connection signal="area_entered" from="." to="." method="_on_Fire_area_entered"]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]

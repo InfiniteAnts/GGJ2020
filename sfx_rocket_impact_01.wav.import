@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/sfx_rocket_impact_01.wav-381662ca2a2b0e59b22cd61f6a071d7a.sample"
+
+[deps]
+
+source_file="res://sfx_rocket_impact_01.wav"
+dest_files=[ "res://.import/sfx_rocket_impact_01.wav-381662ca2a2b0e59b22cd61f6a071d7a.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

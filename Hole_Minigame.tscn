@@ -1,18 +1,92 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Hole_Minigame.gd" type="Script" id=1]
+[ext_resource path="res://mechrepair_minigame_fire/mechrepair_minigames_fire_export_0000_Extinguish-Cursor.png" type="Texture" id=2]
+[ext_resource path="res://Extuingisher.gd" type="Script" id=3]
+[ext_resource path="res://mechrepair_minigame_fire/mechrepair_minigames_fire_0000s_0009_Extinguish-Effect.png" type="Texture" id=4]
+[ext_resource path="res://mechrepair_minigame_fire/mechrepair_minigames_fire_0000s_0008_Extinguish-Effect-2.png" type="Texture" id=5]
+[ext_resource path="res://sfx_fire_extinguish.wav" type="AudioStream" id=6]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 34.9449, 51.4695 )
+
+[sub_resource type="SpriteFrames" id=2]
+animations = [ {
+"frames": [ null ],
+"loop": false,
+"name": "idle",
+"speed": 1.0
+}, {
+"frames": [ ExtResource( 4 ), ExtResource( 5 ) ],
+"loop": true,
+"name": "smoke",
+"speed": 2.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 103.152, 89.9758 )
 
 [node name="Hole_Minigame" type="Node2D"]
 script = ExtResource( 1 )
 
+[node name="ColorRect" type="ColorRect" parent="."]
+modulate = Color( 0.65098, 0.807843, 0.835294, 1 )
+show_behind_parent = true
+margin_right = 1432.0
+margin_bottom = 552.0
+mouse_filter = 2
+color = Color( 0.65098, 0.807843, 0.835294, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="Position2D" type="Position2D" parent="."]
-position = Vector2( 1152.91, 781.255 )
+position = Vector2( 75.1441, 511.813 )
 
 [node name="Position2D2" type="Position2D" parent="."]
-position = Vector2( 1142.72, 520.016 )
+position = Vector2( 45.3944, 59.4901 )
 
 [node name="Position2D3" type="Position2D" parent="."]
-position = Vector2( 1464.95, 528.697 )
+position = Vector2( 1227.7, 66.6902 )
 
 [node name="Position2D4" type="Position2D" parent="."]
-position = Vector2( 1460.95, 764.985 )
+position = Vector2( 1243.21, 498.801 )
+
+[node name="Timer" type="Timer" parent="."]
+
+[node name="Extuingisher" type="Area2D" parent="."]
+position = Vector2( 1220.41, 442.775 )
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Sprite" type="Sprite" parent="Extuingisher"]
+scale = Vector2( 0.4, 0.4 )
+texture = ExtResource( 2 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Extuingisher"]
+shape = SubResource( 1 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Smoke" type="AnimatedSprite" parent="Extuingisher"]
+position = Vector2( -87.1204, -9.11642 )
+scale = Vector2( 0.5, 0.5 )
+frames = SubResource( 2 )
+animation = "smoke"
+
+[node name="Smoke" type="Area2D" parent="Extuingisher/Smoke"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Extuingisher/Smoke/Smoke"]
+shape = SubResource( 3 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Extuingisher"]
+stream = ExtResource( 6 )
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
+[connection signal="clicked" from="Extuingisher" to="." method="_on_Extuingisher_clicked"]
+[connection signal="input_event" from="Extuingisher" to="Extuingisher" method="_on_Extuingisher_input_event"]

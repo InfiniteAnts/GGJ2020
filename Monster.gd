@@ -71,4 +71,5 @@ func attacked(monster_atk):
 	
 	hp = hp - damage_taken
 	
+	$AudioStreamPlayer.play()
 	$'../Healthbars'.update_monster_health(hp)
