@@ -27,4 +27,4 @@ func show_game_over():
 	$Timer.start()
 	
 func _on_Timer_timeout():
-	$'..'.quit()
+	get_tree().quit()

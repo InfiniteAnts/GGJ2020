@@ -40,11 +40,13 @@ animations = [ {
 extents = Vector2( 22.7143, 21.9261 )
 
 [node name="Node2D" type="Area2D"]
+show_behind_parent = true
 gravity_vec = Vector2( 0, 0 )
 gravity = 0.0
 script = ExtResource( 2 )
 
 [node name="Hole" type="AnimatedSprite" parent="."]
+show_behind_parent = true
 scale = Vector2( 0.3, 0.3 )
 frames = SubResource( 1 )
 animation = "patched"

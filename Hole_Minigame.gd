@@ -49,16 +49,16 @@ func _on_hole_patched():
 	if rand_number == 1:
 		
 	# Add armor each time, fire is extuingished	
-		$'/root/Global'.health['armour'] += int(0.8 * (70 - $'/root/Global'.health['armour']))
+		$'/root/Global'.health['armour'] += int(0.95 * (70 - $'/root/Global'.health['armour']))
 	
 	elif rand_number == 2:
-		$'/root/Global'.health['mel_atk'] += int(0.8 * (100 - $'/root/Global'.health['mel_atk']))
+		$'/root/Global'.health['mel_atk'] += int(0.95 * (100 - $'/root/Global'.health['mel_atk']))
 		
 	elif rand_number == 3:
-		$'/root/Global'.health['rngd_atk'] += int(0.8 * (100 - $'/root/Global'.health['rngd_atk']))
+		$'/root/Global'.health['rngd_atk'] += int(0.95 * (100 - $'/root/Global'.health['rngd_atk']))
 		
 	else:
-		$'/root/Global'.health['dodge'] += int(0.8 * (50 - $'/root/Global'.health['dodge']))
+		$'/root/Global'.health['dodge'] += int(0.95 * (50 - $'/root/Global'.health['dodge']))
 
 # Keep generating 
 func _on_Timer_timeout():

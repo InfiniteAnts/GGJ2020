@@ -196,7 +196,6 @@ __meta__ = {
 
 [node name="Volley_Timer" type="Timer" parent="."]
 wait_time = 2.0
-autostart = true
 
 [node name="Robot" type="Sprite" parent="."]
 position = Vector2( 499.248, 263.863 )
@@ -381,7 +380,10 @@ __meta__ = {
 "_edit_group_": true,
 "_edit_lock_": true
 }
-dodge = 12
+armour = 50
+mel_atk = 5
+rngd_atk = 5
+dodge = 10
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Monster"]
 stream = ExtResource( 48 )
